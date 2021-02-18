@@ -1,2 +1,2 @@
 # signalr-sample
-Sample .Net real time application using SignalR
+Sample .Net real-time application using SignalR
