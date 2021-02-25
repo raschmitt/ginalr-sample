@@ -19,12 +19,24 @@ namespace HubSample.Controllers
             _items = items;
         }
         
+        /// <summary>
+        /// Gets all items
+        /// </summary>
         [HttpGet]
         public IActionResult GetItems()
         {
             return Ok(_items);
         }
         
+        /// <summary>
+        /// Adds a new item to the list
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        /// "Shampoo"
+        ///
+        /// </remarks>
         [HttpPost]
         public async Task<IActionResult> AddItem([FromBody] string item)
         {
