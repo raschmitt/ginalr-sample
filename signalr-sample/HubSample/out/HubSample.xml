@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HubSample</name>
+    </assembly>
+    <members>
+        <member name="M:HubSample.Controllers.ItemsController.GetItems">
+            <summary>
+            Gets all items
+            </summary>
+        </member>
+        <member name="M:HubSample.Controllers.ItemsController.AddItem(System.String)">
+             <summary>
+             Adds a new item to the list
+             </summary>
+             <remarks>
+             Sample request:
+            
+             "Shampoo"
+            
+             </remarks>
+        </member>
+    </members>
+</doc>
