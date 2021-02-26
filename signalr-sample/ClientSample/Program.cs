@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 
@@ -8,25 +9,29 @@ namespace ClientSample
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            var client = new HttpClient();
+        private static readonly AutoResetEvent AutoEvent = new(false);
+        private static readonly HttpClient Client = new ();
 
+        private const string HubBaseUrl = "http://signalr-hub";
+
+        static void Main()
+        {
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5000/itemsHub")
+                .WithUrl($"{HubBaseUrl}/itemsHub")
                 .Build();
 
-            connection.On("UpdateList", () => GetItems(client));
+            connection.On("UpdateList", GetItems);
             
             connection.StartAsync().GetAwaiter().GetResult();
 
             Console.WriteLine("Listening on itemsHub, press ENTER to exit.");
-            Console.Read();
+
+            AutoEvent.WaitOne();
         }
 
-        private static void GetItems(HttpClient client)
+        private static void GetItems()
         {
-            var response = client.GetAsync("https://localhost:5001/Items").GetAwaiter().GetResult();
+            var response = Client.GetAsync($"{HubBaseUrl}/Items").GetAwaiter().GetResult();
             var list = DeserializeResponse<List<string>>(response);
 
             Console.WriteLine("Updated list: ");

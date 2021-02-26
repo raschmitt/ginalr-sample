@@ -6,7 +6,6 @@ using HubSample.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace HubSample
@@ -19,6 +18,7 @@ namespace HubSample
             
             services.AddControllers();
             services.AddSignalR();
+            services.AddHealthChecks();
 
             services.AddSwaggerGen(c =>
             {
@@ -33,18 +33,15 @@ namespace HubSample
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HubSample v1"));
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HubSample v1"));
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/health");
+                endpoints.MapControllers();
                 endpoints.MapHub<ItemsHub>("/itemsHub");
             });
         }
