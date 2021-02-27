@@ -12,6 +12,8 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "HubSample.dll"]
 
+RUN apt-get update && apt-get install -y \
+    curl
 HEALTHCHECK CMD curl --fail http://localhost:80/health || exit
 
 EXPOSE 80
