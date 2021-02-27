@@ -1,5 +1,7 @@
 # SignalR - Sample
 
+[![Azure DevOps builds](https://img.shields.io/azure-devops/build/raschmitt/7618d927-8467-43e2-b5e9-1aeddc1fbfdc/25?label=Build&style=flat-square)](https://dev.azure.com/raschmitt/raschmitt/_build?definitionId=25)
+
 This sample projects shows how to use `SignalR` to work with real-time applications in `.Net`.
 
 For more information on `SignalR` refer to their [official repository](https://github.com/dotnet/aspnetcore/tree/main/src/SignalR).
