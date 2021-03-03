@@ -10,3 +10,5 @@ resources:
 
 extends:
   template: templates\c_sharp\template.yml@templates
+  parameters:
+    run_mutation: false
