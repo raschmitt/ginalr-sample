@@ -1,5 +1,8 @@
 trigger:
-- master
+  - master
+
+variables:
+  - group: signalr-sample
 
 resources:
   repositories:
